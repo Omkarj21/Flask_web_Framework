@@ -1,19 +1,34 @@
-from flask import Flask, render_template, request,jsonify
-from flask_cors import CORS,cross_origin
-import requests
+# This project made with Flask Web Framework,
+# This project is to see reviews of Mobile brands with Flipkart website
+# This project used Heroku Cloud for deployment
+
+from flask import Flask, render_template, request
+# flask-request => The data from a client’s web page gets sent to the server as a global "request" object. In order to process the request data, it should be imported from the Flask module.
+# flask-render_template => Instead of returning hardcode HTML from the function, a HTML file can be rendered by the render_template() function. Flask will try to find the HTML file in the templates folder, in the same folder in which this script is present.
+from flask_cors import cross_origin # This is nothing but CORS = Cross-origin resource sharing to work with Web
+import requests # used to get web data
 from bs4 import BeautifulSoup as bs
+# Beautiful Soup is a Python package for parsing HTML and XML documents. It creates a parse tree for parsed pages that can be used to extract data from HTML, which is useful for web scraping
 from urllib.request import urlopen as uReq
+# urllib is a package that collects several modules for working with URLs:
+# urllib.request for opening and reading URLs
+# urllib.error containing the exceptions raised by urllib.request
+# urllib.parse for parsing URLs
+# urllib.robotparser for parsing robots.txt files
+
 
 app = Flask(__name__)
+# This is abstractly setting the name of the Flask instance to app And we want this for our secret key and decorators.
+# Then the Flask instance's name is actually set to __main__ once we run it interactively
 
 @app.route('/',methods=['GET'])  # route to display the home page
 @cross_origin()
-def homePage():
-    return render_template("index.html")
+def homePage(): # This will be 1st page
+    return render_template("index.html") # Call index.html
 
 @app.route('/review',methods=['POST','GET']) # route to show the review comments in a web UI
 @cross_origin()
-def index():
+def index(): # when Click on http://127.0.0.1:5000/review SEARCH Button
     if request.method == 'POST':
         try:
             searchString = request.form['content'].replace(" ","")
