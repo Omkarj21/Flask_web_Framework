@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+<!--Here the meaning of above line is to call the code which is inside base.html before executing below code-->
 {% block head %}
 
 <title>Search Page</title>
@@ -11,6 +11,7 @@
     <h1 style="text-align: center">Search Reviews of Mobile Brands </h1>
 
     <div class="form">
+        <!--Here we setting control to next action i.e telling to execute review = "http://127.0.0.1:5000/review" -->
         <form action="/review" method="POST">
             <input type="text" name="content" id="content">
             <input type="submit" value="Search">
